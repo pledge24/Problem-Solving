@@ -1,3 +1,5 @@
 # no upload json file
-
 *.json
+
+# no upload build file
+build/
