@@ -11,7 +11,7 @@ int dx[DIR] = {1, 0, -1, 0};
 int dy[DIR] = {0, 1, 0, -1};
 
 vector<vector<int>> matrix;
-vector<vector<bool>> visited;
+vector<vector<bool>> visited_data;
 vector<vector<long long>> dp;
 
 bool inRange(int m, int n){
@@ -21,11 +21,11 @@ bool inRange(int m, int n){
 long long memolization(int m, int n){
 
     // 이미 경우의 수를 구한경우(방문은 했지만 경우의 수가 없는경우 포함(visited가 true인데 값이 0인 경우)).
-    if(visited[m][n]){
+    if(visited_data[m][n]){
         return dp[m][n];
     }
     
-    visited[m][n] = true;
+    visited_data[m][n] = true;
 
     // 처음 방문한 경우
     for(int i=0; i<DIR; i++){
@@ -47,7 +47,7 @@ int main() {
     cin >> M >> N;
 
     matrix.resize(M+1, vector<int>(N+1));
-    visited.resize(M+1, vector<bool>(N+1));
+    visited_data.resize(M+1, vector<bool>(N+1));
 
     for(int m = 1; m <= M; m++){
         for(int n = 1; n <= N; n++){

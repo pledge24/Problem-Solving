@@ -6,7 +6,7 @@ using namespace std;
 
 int N, M;
 
-vector<int> v1, visited;
+vector<int> v1, visited_data;
 
 vector<int> ans;
 void dfs(int idx){
@@ -21,11 +21,11 @@ void dfs(int idx){
     }
 
     for(int i=0; i<v1.size(); i++){
-        if(!visited[i]){
-            visited[i] = true;
+        if(!visited_data[i]){
+            visited_data[i] = true;
             ans.push_back(v1[i]);
             dfs(i+1);
-            visited[i] = false;
+            visited_data[i] = false;
             ans.pop_back();
         }
     }
@@ -41,7 +41,7 @@ int main() {
     cin >> N >> M;
 
     v1.resize(N);
-    visited.resize(N);
+    visited_data.resize(N);
 
     for(int i=0; i<N; i++){
         cin >> v1[i];
