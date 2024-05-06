@@ -4,52 +4,44 @@
 
 using namespace std;
 
-struct path_data
-{
-    int node_no;
-    int distance;
-};
-
-struct edge_data
-{
-    int node_no;
-    int weight;
-};
-
 struct cmp
 {
-    bool operator()(const path_data& a, const path_data& b){
-        return a.distance > b.distance;
+    bool operator()(const pair<int, int>& a, const pair<int, int>& b){
+        return a.second > b.second;
     }
 };
 
 int V, E, K; 
-vector<vector<edge_data>> graph;
+vector<vector<pair<int, int>>> graph; // first : node_no, second: weight
 
 vector<int> dijkstra_algorithm(int start_node_no){
 
-    priority_queue<path_data, vector<path_data>, cmp> pq;
-    vector<int> shortest_path(V+1, INT32_MAX);
+    priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq; // first : node_no, second: distance
+    vector<int> shortest_dist(V+1, INT32_MAX);
 
     // init
-    for(edge_data ed : graph[start_node_no]){
-        pq.push({ed.node_no, ed.weight});
-        shortest_path[ed.node_no] = ed.weight;
+    for(auto ed : graph[start_node_no]){
+        pq.push({ed.first, ed.second});
+        shortest_dist[ed.first] = ed.second;
     }
 
     while(!pq.empty()){
-        path_data cur_path = pq.top(); pq.pop();
+        pair<int, int> cur_path = pq.top(); pq.pop();
 
-        for(edge_data ed : graph[cur_path.node_no]){
-            if(shortest_path[cur_path.node_no] + ed.weight < shortest_path[ed.node_no]){
-                pq.push({ed.node_no, shortest_path[cur_path.node_no] + ed.weight});
-                shortest_path[ed.node_no] = shortest_path[cur_path.node_no] + ed.weight;
+        for(pair<int, int> ed : graph[cur_path.first]){
+
+            int Next_node = ed.first;
+            int nDist = cur_path.second + ed.second;
+            
+            if(nDist < shortest_dist[Next_node]){
+                shortest_dist[ed.first] = nDist;
+                pq.push({ed.first, nDist});        
             }
         }
 
     }
 
-    return shortest_path;
+    return shortest_dist;
 }
 
 int main() {
