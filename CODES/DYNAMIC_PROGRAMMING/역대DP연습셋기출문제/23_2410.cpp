@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 
 #define fastio cin.tie(0)->sync_with_stdio(0)
-#define DIV 1000000000
+#define DIV 1'000'000'000
+#define MAXN 1'000'000
 
 using namespace std;
 
@@ -11,36 +12,38 @@ int main() {
     int max_k = log2(N);
 
     vector<vector<int>> dp;
-    dp.resize(N+1, vector<int>(max_k+1, 0));
+    vector<int> last_pos;
+    dp.resize(MAXN+1, vector<int>(max_k+1));        // N -> MAXN으로 변경했는데 통과한 이유...?
+    last_pos.resize(MAXN+1);
 
-    fill(dp[0].begin(), dp[0].end(), 1);
-    
-    for(int n = 1; n <= N; n++){
-        for(int k = 0; k <= max_k; k++){
+    dp[1][0] = 1;
+    dp[2][0] = 1, dp[2][1] = 2;
+
+    last_pos[1] = 0;
+    last_pos[2] = 1;
+
+    // pow(2, k) -> (1 << k)로 바꾸기만 했는데도 시간초과 문제가 해결됨.
+    for(int n = 3; n <= N; n++){
+        for(int k = 0; n >= (1 << k); k++){
    
             if(k == 0) {
                 dp[n][k] = 1; 
                 continue;
             }
 
-            dp[n][k] = dp[n][k-1];
-
-            if(n - pow(2, k) >= 0){
-                //cout <<  *max_element(dp[n - pow(2, k)].begin(), dp[n - pow(2, k)].end()) << '\n';
-                dp[n][k] = (dp[n][k] + *max_element(dp[n - pow(2, k)].begin(), dp[n - pow(2, k)].begin()+k+1)) % DIV; 
+            if(n - (1 << k) > 0){
+                int x = min(last_pos[n-(1 << k)], k);
+                dp[n][k] = (dp[n][k-1] + dp[n-(1 << k)][x]) % DIV; 
+            }
+            else if((n - (1 << k)) == 0){
+                dp[n][k] = (dp[n][k-1] + 1) % DIV;
             }
 
+            last_pos[n] = k;
         }
+        
     }
 
-    // for(int n = 1; n <= N; n++){
-    //     for(int k = 0; k <= max_k; k++){
-    //         cout << dp[n][k] << ' ';
-    //     }
-    //     cout << '\n';
-    // }
+    cout << dp[N][max_k] << '\n';
 
-     cout << dp[N][max_k] << '\n';
-
-    
 }

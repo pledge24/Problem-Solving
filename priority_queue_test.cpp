@@ -21,7 +21,7 @@ struct cmp
 int main() {
     fastio;
   
-    priority_queue<int, vector<int>, greater<int>> pq_greater;
+    edge_data<int, vector<int>, greater<int>> pq_greater;
     
     pq_greater.push(1);
     pq_greater.push(3);
@@ -35,7 +35,7 @@ int main() {
     }
     cout << '\n';
   
-    priority_queue<int, vector<int>, less<int>> pq_less;
+    edge_data<int, vector<int>, less<int>> pq_less;
 
     pq_less.push(1);
     pq_less.push(3);
@@ -49,7 +49,7 @@ int main() {
     }
     cout << '\n';
 
-    priority_queue<int> pq;
+    edge_data<int> pq;
 
     pq.push(1);
     pq.push(3);
