@@ -1,8 +1,14 @@
 # no upload json file
 *.json
 
-# no upload build file
+# no upload build folder
 build/
 
-# no upload build file
+# no upload exe file
 *.exe
+
+# no upload .vscode folder
+*.vscode/
+
+# no upload .cph folder
+*.cph/
