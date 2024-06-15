@@ -24,7 +24,7 @@ void transmit_warm(int idx) {
 	}
 }
 
-int main2606(void) {
+int main(void) {
 
 	cin >> computers >> connects;
 

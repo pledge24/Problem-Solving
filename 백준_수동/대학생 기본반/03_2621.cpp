@@ -91,7 +91,7 @@ int calc_score() {
 	return 100 + high;										// top
 }
 
-int main_2621(void) {
+int main(void) {
 
 	for (int i = 0; i < 5; i++) {
 		cin >> c >> num;

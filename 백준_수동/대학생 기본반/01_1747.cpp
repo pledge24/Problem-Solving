@@ -27,7 +27,7 @@ bool isPrime(int N) {
 	return true;
 }
 
-int main1(void) {
+int main(void) {
 
 	int N;
 

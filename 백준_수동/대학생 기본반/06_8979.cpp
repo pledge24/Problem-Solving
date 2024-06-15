@@ -26,7 +26,7 @@ bool compareCountries(const Country& a, const Country& b) {
 	}
 }
 
-int main8979() {
+int main() {
 	fastio;
 	int N, K;
 	cin >> N >> K;
