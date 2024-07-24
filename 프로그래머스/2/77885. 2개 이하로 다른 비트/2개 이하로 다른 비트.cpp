@@ -23,34 +23,30 @@ vector<long long> solution(vector<long long> numbers) {
             temp_elem /= 2;
         }
                
-        // 0, 1의 위치를 벡터에 저장.
-        vector<int> one_v;
-        vector<int> zero_v;
-        for(int i = 0; i < v1.size(); i++){
-            if(v1[i] > 0){
-                one_v.push_back(i);
-            } 
-            else {    
-                zero_v.push_back(i);
-            }           
-        }
-
-
+       
         // 0 -> 1
         long long a = 1;
-        a = a << zero_v[0];      
+        for(int i = 0; i < v1.size(); i++){
+            // 가장 작은 0을 찾고 해당 위치를 1로 바꾼 것이 답.
+            if(v1[i] == 0){
+                a = a << i;   
+                break;
+            }
+        }
         
+        // 01 -> 10
         long long b = 1;
         for(int i = 1; i < v1.size(); i++){
-            if(v1[i] == 0 && v1[i-1] == 1){           
+            // 가장 작은 01 패턴을 찾고 해당 1의 값이 답.
+            if(v1[i] == 0 && v1[i-1] == 1){  
+                // 숫자는 기본 int형이다. 1을 << 하게되면 int형이라 오버플로우가 발생할 수 있다.
                 b = (b << (i-1));
                 break;
             }
         }
         
         answer.push_back(elem + min(a, b));
-        
-        
+    
     }
     return answer;
 }
