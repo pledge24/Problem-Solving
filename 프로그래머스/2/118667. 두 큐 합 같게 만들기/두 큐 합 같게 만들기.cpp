@@ -58,6 +58,8 @@ int solution(vector<int> queue1, vector<int> queue2) {
         int pop_cnt = pd.start;
         int push_cnt = pd.end < queue1.size() ? 0 : pd.end + 1 - queue1.size();
         
+        // queue1에서 시작한 연속된 부분 수열이 queue1의 끝부분 일부를 포함하지 않는다면, 
+        // 수열을 queue2에 넘기고 queue2원소를 전부 queue1로 넘겨야한다.
         if(pd.end < queue1.size() - 1){
             pop_cnt = pd.end + 1;
             push_cnt = queue2.size();
