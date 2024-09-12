@@ -15,6 +15,6 @@ string solution(string s) {
     }
     
     answer = s;
-    
+
     return answer;
 }
