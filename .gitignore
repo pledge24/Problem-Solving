@@ -12,3 +12,6 @@ build/
 
 # no upload .cph folder
 *.cph/
+
+# no upload bin file
+*.bin
