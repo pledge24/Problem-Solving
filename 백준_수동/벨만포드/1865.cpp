@@ -11,7 +11,7 @@ struct edgeData{
     int weight;
 };
 
-vector<long long> bellmanFord(vector<vector<int>> graph, vector<edgeData> edgeList, int st){
+vector<long long> bellmanFord(vector<vector<int>>& graph, vector<edgeData>& edgeList, int st){
     vector<long long> minDist(graph.size(), INF);
     minDist[st] = 0;
 
@@ -22,11 +22,11 @@ vector<long long> bellmanFord(vector<vector<int>> graph, vector<edgeData> edgeLi
             int vtx2 = edgeList[j].vtx2;
             int weight = edgeList[j].weight;
             
-            if(minDist[vtx1] != INF && minDist[vtx1] + graph[vtx1][vtx2] < minDist[vtx2]){
+            if(minDist[vtx1] + graph[vtx1][vtx2] < minDist[vtx2]){
                 minDist[vtx2] = minDist[vtx1] + graph[vtx1][vtx2];
 
                 if(i == N-1){
-                    minDist[vtx2] = -INF;
+                    return {};
                 }
             }
         }
@@ -53,6 +53,7 @@ bool solve(){
         graph[vtx2][vtx1] = min(graph[vtx2][vtx1], weight);
 
         edgeList.push_back({vtx1, vtx2, weight});
+        edgeList.push_back({vtx2, vtx1, weight});
     }
 
     for(int i = 0; i < W; i++){
@@ -63,25 +64,11 @@ bool solve(){
         edgeList.push_back({vtx1, vtx2, -weight});
     }
 
-    vector<vector<long long>> minPathList(N+1);
-    for(int i = 1; i <= N; i++){
-        minPathList[i] = bellmanFord(graph, edgeList, i);
 
-        // for(long long elem : minDist){
-        //     cout << elem << ' ';
-        // }
-        // cout << '\n';
-    }
-    
-    for(int from = 1; from <= N; from++){
-        for(int to = 1; to <= N; to++){
-            if(minPathList[from][to] == -INF || minPathList[to][from] == -INF){
-                if(minPathList[from][to] != INF && minPathList[to][from] != INF){
-                    return true;
-                }
-            }
-        }
-    }
+    if(bellmanFord(graph, edgeList, 1).size() == 0){
+        return true;
+    };
+  
     return false;
 }
 
