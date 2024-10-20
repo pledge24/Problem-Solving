@@ -28,6 +28,7 @@ vector<int> dijkstra_algorithm(int start_node_no){
     while(!pq.empty()){
         pair<int, int> cur_path = pq.top(); pq.pop();
 
+        if(cur_path.second != shortest_dist[cur_path.first]) continue;
         for(pair<int, int> ed : graph[cur_path.first]){
 
             int Next_node = ed.first;
