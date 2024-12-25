@@ -1,0 +1,8 @@
+-- "음식 종류별"로 "즐겨찾기 수"가 "가장 많은 식당"은?
+SELECT FOOD_TYPE, REST_ID, REST_NAME, FAVORITES
+FROM (SELECT *, rank() over (partition by FOOD_TYPE order by FAVORITES desc) RNK FROM REST_INFO) INFO
+WHERE INFO.RNK = 1
+GROUP BY FOOD_TYPE 
+ORDER BY FOOD_TYPE DESC
+
+
