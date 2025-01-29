@@ -37,7 +37,7 @@ void startTest(){
 
     // size > 0
     int start = 0;
-    int end = v1.size();
+    int end = v1.size()-1;
     bool isReversed = false;
     for(char c : p){
         if(c == 'R'){
@@ -58,23 +58,17 @@ void startTest(){
     // print
     if(isReversed){
         cout << '[';
-        for(int i = end-1; start <= i; i--){
-            cout << v1[i];
-            if(i != start){
-                cout << ',';
-            }
+        for(; start < end; end--){
+            cout << v1[end] << ",";
         }
-        cout << ']' << '\n';
+        cout << v1[start] << "]\n";
     }
     else{
         cout << '[';
-        for(int i = start; i <= end-1; i++){
-            cout << v1[i];
-            if(i != end-1){
-                cout << ',';
-            }
+        for(; start < end; start++){
+            cout << v1[start] << ",";
         }
-        cout << ']' << '\n';
+        cout << v1[end] << "]\n";
     }
     
     return;
