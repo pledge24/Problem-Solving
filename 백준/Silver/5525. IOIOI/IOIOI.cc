@@ -7,20 +7,51 @@ using namespace std;
 int main(void){
     fastio;
     int N; cin >> N;
-    int len; cin >> len;
-    string s; cin >> s;
+    int M; cin >> M;
+
+    vector<int> streakList;
+    int streak = 0;     // "IO"가 반복된 횟수
+    char desired = 'I';
+    for(int i = 0; i < M; i++){
+        char c; cin >> c;
+
+        if(c == desired){
+            streak++;
+            desired = (desired == 'I') ? 'O' : 'I';
+        }
+        else{
+
+            if(streak >= 3){
+                streakList.push_back((streak-1)/2);
+            }
+
+            if(c == 'I'){
+                streak = 1;
+                desired = 'O';
+            }
+            else{
+                streak = 0;
+                desired = 'I';
+            }
+            
+        }
+    }
     
-    string target = "I";
-    for(int i = 0; i < N; i++){
-        target += "OI";
+    if(streak >= 3){
+        streakList.push_back((streak-1)/2);
     }
 
-    map<string, int> m;
-    for(int i = 0; i + target.length() - 1 < len; i++){
-        m[s.substr(i, target.length())]++;
+    int cnt = 0;
+    for(int elem : streakList){
+        // cout << elem << ' ';
+
+        if(elem - N + 1 > 0){
+            cnt += elem - N + 1;
+        }
+        
     }
 
-    cout << m[target] << '\n';
+    cout << cnt << '\n';
 
     return 0;
 }
