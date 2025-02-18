@@ -1,47 +1,47 @@
 #include <bits/stdc++.h>
 
 #define fastio cin.tie(0)->sync_with_stdio(0)
-#define MAXN 100'001
+
 using namespace std;
 
-int main()
-{
-    fastio;
-    long long N, S;
-    cin >> N >> S;
+// target이상의 부분 합의 최소 길이
+int twoPointer(vector<int>& v1, int target){
+    int end = 0; // start와 end는 겹쳐있다는 설정.
+    int len = v1.size();
+    int minLen = INT32_MAX, sum = v1[0];
 
-    vector<long long> v1;
-    v1.resize(N);
+    for(int start = 0; start < len; start++){
 
-    int start_idx = 0;
-    long long sum = 0;
-
-    int ans = MAXN;
-    for (int end_idx = 0; end_idx < N; end_idx++)
-    {
-        cin >> v1[end_idx];
-
-        sum += v1[end_idx];
-
-        if (sum >= S)
-        {
-            while (sum - v1[start_idx] >= S && start_idx < end_idx)
-            {
-                sum -= v1[start_idx];
-                start_idx++;
-            }
-
-            if(sum >= S)
-                ans = end_idx - start_idx + 1 < ans ? end_idx - start_idx + 1 : ans;
-            //cout << start_idx << " " << end_idx << '\n';
+        // end 최대한 멀리 보내기
+        while(end < len && sum < target){
+            end++;
+            if(end != len) sum += v1[end];
         }
+
+        // 더 이상 S이상의 값이 없음.
+        if(end == len) break;
+
+        minLen = min(minLen, end-start+1);
+        sum -= v1[start];
     }
 
+    return minLen;
+}
 
-    if (ans == MAXN)
-    {
-        ans = 0;
+int main() {
+	fastio;
+    int N, S; cin >> N >> S;
+
+    vector<int> v1; v1.resize(N);
+
+    for(int i = 0; i < N; i++){
+        cin >> v1[i];
     }
+
+    int ans = twoPointer(v1, S);
+
+    if(ans == INT32_MAX) ans = 0;
 
     cout << ans << '\n';
+    
 }

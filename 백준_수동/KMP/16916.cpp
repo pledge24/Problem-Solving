@@ -4,17 +4,17 @@
 
 using namespace std;
 
-int myFind(string s){
+int main(void){
+    fastio;
 
-}
-
-int main() {
-	fastio;
-    
     string S, P; cin >> S >> P;
 
-    int ans = S.find(P) != string::npos ? 1 : 0;
+    char* str1 = new char [S.length()+1];
+    char* str2 = new char [P.length()+1];
+
+    strcpy(str1, S.c_str());
+    strcpy(str2, P.c_str());
+    int ans = strstr(str1, str2) != NULL;
 
     cout << ans << '\n';
-    
 }

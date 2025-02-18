@@ -20,14 +20,13 @@ vector<int> dijkstra(int start_node_no){
     vector<int> shortest_dist(V+1, INT32_MAX);
 
     // init
-    for(auto ed : graph[start_node_no]){
-        pq.push({ed.first, ed.second});
-        shortest_dist[ed.first] = ed.second;
-    }
-
+    shortest_dist[start_node_no] = 0;
+    pq.push({start_node_no, 0});
+   
     while(!pq.empty()){
         pair<int, int> cur_path = pq.top(); pq.pop();
 
+        if(cur_path.second != shortest_dist[cur_path.first]) continue;
         for(pair<int, int> ed : graph[cur_path.first]){
 
             int Next_node = ed.first;
