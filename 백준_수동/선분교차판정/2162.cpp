@@ -41,8 +41,6 @@ bool isCross(pair<point, point> l1, pair<point, point> l2) {
     }
     
     return p1p2 <= 0 && p3p4 <= 0;
-    
-    
 }
 
 int find_root(int x) {

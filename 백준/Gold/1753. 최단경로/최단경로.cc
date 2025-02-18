@@ -14,7 +14,7 @@ struct cmp
 int V, E, K; 
 vector<vector<pair<int, int>>> graph; // first : node_no, second: weight
 
-vector<int> dijkstra_algorithm(int start_node_no){
+vector<int> dijkstra(int start_node_no){
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq; // first : node_no, second: distance
     vector<int> shortest_dist(V+1, INT32_MAX);
@@ -58,7 +58,7 @@ int main() {
     }  
     
     vector<int> ans;
-    ans = dijkstra_algorithm(K);
+    ans = dijkstra(K);
 
     for(int i = 1; i<=V; i++){
         if(ans[i] == INT32_MAX){
