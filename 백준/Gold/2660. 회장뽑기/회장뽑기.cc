@@ -51,21 +51,14 @@ int main(void){
 
     sort(scores.begin(), scores.end());
 
-    // int minScore = scores[0].first;
-    // int candidateN = count_if(scores.begin(), scores.end(), [minScore](auto elem){return elem.first == minScore;});
-    // cout << scores[0].first << ' ' << candidateN << '\n';
-    // for(int i = 0; i < candidateN; i++){
-    //     cout << scores[i].second << ' ';
-    // }
-    // cout << '\n';
-
     int minScore = scores[0].first;
-    int candidateN = 0;
-    for(auto it : scores){
-        if(it.first > minScore)
-            break;
-        candidateN++;
-    }
+    int candidateN = count_if(scores.begin(), scores.end(), [minScore](auto elem){return elem.first == minScore;});
+
+    // for(auto it : scores){
+    //     if(it.first > minScore)
+    //         break;
+    //     candidateN++;
+    // }
 
     cout << scores[0].first << ' ' << candidateN << '\n';
     for(int i = 0; i < candidateN; i++){
