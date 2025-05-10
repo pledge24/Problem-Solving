@@ -23,6 +23,8 @@ int dx[DIR3D] = {1, 0, -1, 0, 0, 0};
 int dy[DIR3D] = {0, 1, 0, -1, 0, 0};
 int dz[DIR3D] = {0, 0, 0, 0, 1, -1};
 
+static int Scnt = 0;
+
 struct PosData{
     int x;
     int y;
@@ -79,13 +81,15 @@ bool inRange(int x, int y, int z){
 }
 
 void bfs(int& ans, Cube& cube){
+    Scnt++;
+
     if(cube[0][0][0] == 0 || cube[N-1][N-1][N-1] == 0){
         return;
     }
 
     queue<PosData> q;
     q.push({0, 0, 0, 0});
-    cube[0][0][0] = 1;
+    cube[0][0][0] = 0;
 
     while(!q.empty()){
         PosData cur = q.front(); q.pop();
@@ -95,13 +99,13 @@ void bfs(int& ans, Cube& cube){
             int ny = cur.y + dy[i];
             int nz = cur.z + dz[i];
 
-            if(inRange(nx, ny, nz) && cube[nx][ny][nz] == 0){
+            if(inRange(nx, ny, nz) && cube[nx][ny][nz] == 1){
                 if(nx == N-1 && ny == N-1 && nz == N-1){
                     ans = min(ans, cur.moveN+1);
                     return;
                 }
                 q.push({nx, ny, nz, cur.moveN+1});
-                cube[nx][ny][nz] = 1;
+                cube[nx][ny][nz] = 0;
             }
         }
     }
@@ -181,5 +185,6 @@ int main(void){
 
     cout << ans << '\n';
 
+    // cout << "Scnt " << Scnt << '\n';
     return 0;
 }
