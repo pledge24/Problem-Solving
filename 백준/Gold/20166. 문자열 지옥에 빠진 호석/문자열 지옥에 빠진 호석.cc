@@ -24,9 +24,6 @@ Pos getNextPos(int nx, int ny){
 
 void dfsUtil(Matrix& matrix, map<string, int>& m1, Pos pos, string& str, int& maxLen){
     if(str.length() == maxLen){
-        // cout << "maxLen! str: " << s << '\n';
-
-        m1[str]++;
         return;
     }
 
@@ -42,6 +39,7 @@ void dfsUtil(Matrix& matrix, map<string, int>& m1, Pos pos, string& str, int& ma
 
 void dfs(Matrix& matrix, map<string, int>& m1, Pos pos, int maxLen){
     string str = {matrix[pos.first][pos.second]};
+    m1[str]++;
 
     dfsUtil(matrix, m1, pos, str, maxLen);
 }
