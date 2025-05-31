@@ -4,17 +4,6 @@
 
 using namespace std;
 
-bool hasThisDigit(int num, char c){
-    int digit = c - '0';
-    while(num > 0){
-        if(num % 10 == digit)
-            return true;
-        num /= 10;
-    }
-
-    return false;
-}
-
 int main(void){
     fastio;
     string str; cin >> str;
@@ -35,7 +24,6 @@ int main(void){
     }
     
     cout << num - 1 << endl;
-
 
     return 0;
 }
