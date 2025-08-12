@@ -22,7 +22,7 @@ int fatigueTable[3][3] = {
 
 void DfsUtil(vector<int>& picks, vector<string>& minerals, vector<int>& sequence, int pickAxeN, int& answer){
     // 종료 조건.
-    if(sequence.size() == pickAxeN){
+    if(sequence.size() == min(pickAxeN, 10)){
         
         // DEBUG: print
         // for(auto elem : sequence){
