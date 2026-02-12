@@ -2,6 +2,7 @@
 
 #define fastio cin.tie(0)->sync_with_stdio(0)
 #define INF INT32_MAX
+
 using namespace std;
 
 struct cmp
@@ -21,25 +22,38 @@ vector<int> dijkstra3(int start){
     vector<int> shortest_dist(V+1, INF);
 
     // init
-    shortest_dist[start] = 0;
-    pq.push({start, 0});
-    fill(parent.begin(), parent.end(), -1);
+    {
+        shortest_dist[start] = 0;
+        pq.push({start, 0});    // 시작점도 최단 거리 "가능성"이라는 거임!
+        fill(parent.begin(), parent.end(), -1);
+    }
 
     // path : (vtx, length)
     // adj : (vtx, weight)
+    // pq에는 확장에서 최단 거리를 갱신했던 데이터만 들어간다.
+    // 최단 경로에 대한 "소문" 같은 것.
     while(!pq.empty()){
         pair<int, int> cur_path = pq.top(); pq.pop();
+        int vtx = cur_path.first;
+        int dist = cur_path.second;
 
-        if(cur_path.second > shortest_dist[cur_path.first]) continue;
+        // 1. 내가 최단 경로가 아니라면 확장 skip.(절대 최단 경로를 만들 수 없기 때문) 
+        if(dist > shortest_dist[vtx]) continue;
         
-        for(pair<int, int> adj : graph[cur_path.first]){
+        // 2. 확장(인접 노드를 순회하면서)한다.
+        for(pair<int, int>& adj : graph[vtx]){
             int next_vtx = adj.first;
-            int next_dist = cur_path.second + adj.second;
+            int next_dist = dist + adj.second;
             
+            // 완화 작업
+            
+            // 거리가 갱신된 경로는 큐에 push한다.
             if(next_dist < shortest_dist[next_vtx]){
                 shortest_dist[next_vtx] = next_dist;
                 pq.push({next_vtx, shortest_dist[next_vtx]});      
-                parent[next_vtx] = cur_path.first; // 다음 정점의 부모를 현재 정점으로 설정 
+
+                // 경로 설정: 이전 경로를 끊고, 현재 정점과 경로를 연결한다.
+                parent[next_vtx] = vtx; 
             }
         }
 

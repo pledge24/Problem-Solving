@@ -3,16 +3,17 @@
 #include <algorithm>
 using namespace std;
 
+// 타겟과 동일한 값이 여러 개면 가장 낮은 위치 반환.
 int lowerBound(vector<int>& v, int target){
     int start = 0, end = v.size();
 
     while(start < end){
         int mid = (start + end) / 2;
 
-        if(v[mid] < target){   // 오른쪽 범위로 이동해야하는 경우(중앙값 < 타겟값)
+        if(v[mid] < target){   // 오른쪽 범위로 이동
             start = mid + 1;
         }
-        else{                   // 왼쪽 범위로 이동해야하는 경우(중앙값 > 타겟값)
+        else{                  // 왼쪽 범위로 이동
             end = mid;
         }
     }
@@ -20,16 +21,17 @@ int lowerBound(vector<int>& v, int target){
     return start; 
 }
 
+// 타겟과 동일한 값이 여러 개면 가장 높은 위치 반환.
 int upperBound(vector<int>& v, int target){
     int start = 0, end = v.size();
 
     while(start < end){
         int mid = (start + end) / 2;
 
-        if(v[mid] <= target){   // 오른쪽 범위로 이동해야하는 경우(중앙값 < 타겟값)
+        if(v[mid] <= target){   // 오른쪽 범위로 이동
             start = mid + 1;
         }
-        else{                   // 왼쪽 범위로 이동해야하는 경우(중앙값 > 타겟값)
+        else{                   // 왼쪽 범위로 이동
             end = mid;
         }
     }
@@ -37,6 +39,7 @@ int upperBound(vector<int>& v, int target){
     return start; 
 }
 
+// 타겍을 찾으면 위치 상관없이 즉시 반환
 int binarySearch(vector<int> &v, int target)
 {
     int start = 0, end = v.size();
@@ -47,9 +50,9 @@ int binarySearch(vector<int> &v, int target)
 
         if (v[mid] == target)
             return mid;
-        else if (v[mid] < target)   // 오른쪽 범위로 이동해야하는 경우(중앙값 < 타겟값)
+        else if (v[mid] < target)   // 오른쪽 범위로 이동
             start = mid + 1;
-        else                        // 왼쪽 범위로 이동해야하는 경우(중앙값 > 타겟값)
+        else                        // 왼쪽 범위로 이동
             end = mid;
     }
 
