@@ -1,10 +1,10 @@
 # [level 3] 최고 속도 - 468376 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/468376?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/468376?language=cpp) 
 
 ### 성능 요약
 
-메모리: 144 MB, 시간: 1760.85 ms
+메모리: 58.9 MB, 시간: 599.70 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 03월 24일 02:03:11
+2026년 03월 24일 02:06:06
 
 ### 문제 설명
 
