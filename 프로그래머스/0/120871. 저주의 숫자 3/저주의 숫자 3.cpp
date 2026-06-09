@@ -5,21 +5,17 @@ using namespace std;
 int solution(int n) {
     int answer = 0;
     
-    int order = 1;
-    int num = 0;
-    while(order <= n)
+    int num = 1;
+    int num3x = 1;
+    while(num < n)
     {
+        do  num3x++;
+        while(num3x % 3 == 0 || (to_string(num3x).find('3') != string::npos));
+            
         num++;
-        
-        if((num % 3 == 0) || (to_string(num).find('3') != string::npos))
-        {
-            continue;
-        }
-        
-        order++;
     }
     
-    answer = num;
+    answer = num3x;
     
     return answer;
 }
